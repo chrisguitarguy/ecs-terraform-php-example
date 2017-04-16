@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -ex
+
+root="$(git rev-parse --show-toplevel)"
+
+pushd "$root"
+
+rm -rf build
+mkdir build
+cp composer.* build/
+cp -R web build/
+
+pushd "$root/build"
+composer install --no-dev --classmap-authoritative
+popd
+
+popd
