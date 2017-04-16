@@ -10,9 +10,12 @@ rm -rf build
 mkdir build
 cp composer.* build/
 cp -R web build/
+cp docker/php/Dockerfile build/
 
 pushd "$root/build"
 composer install --no-dev --classmap-authoritative
 popd
+
+docker build -t ecs-terraform-php-fpm build/
 
 popd
