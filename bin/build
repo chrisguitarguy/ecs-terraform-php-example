@@ -17,5 +17,6 @@ composer install --no-dev --classmap-authoritative
 popd
 
 docker build -t ecs-terraform-php-fpm build/
+docker build -t ecs-terraform-php-nginx docker/nginx/
 
 popd
