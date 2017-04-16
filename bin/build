@@ -10,13 +10,14 @@ rm -rf build
 mkdir build
 cp composer.* build/
 cp -R web build/
-cp docker/php/Dockerfile build/
-
+cp docker/phpfpm/Dockerfile build/phpfpm.dock
+cp docker/nginx/Dockerfile build/nginx.dock
+cp -R docker/nginx/etc build/
 pushd "$root/build"
 composer install --no-dev --classmap-authoritative
 popd
 
-docker build -t ecs-terraform-php-fpm build/
-docker build -t ecs-terraform-php-nginx docker/nginx/
+docker build -t ecs-terraform-php-fpm -f build/phpfpm.dock build/
+docker build -t ecs-terraform-php-nginx -f build/nginx.dock build/
 
 popd
