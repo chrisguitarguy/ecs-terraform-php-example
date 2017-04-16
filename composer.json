@@ -1,0 +1,9 @@
+{
+    "name": "chrisguitarguy/ecs-terraform-example",
+    "description": "A small example app for docker & terraform",
+    "keywords": [],
+    "license": "MIT",
+    "require": {
+        "silex/silex": "~2.0"
+    }
+}
