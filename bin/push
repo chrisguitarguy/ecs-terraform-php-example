@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -e
+
+if [ "$#" != 2 ]; then
+    echo "Usage: $0 {environment} {version}" >&2
+    exit 1
+fi
+
+env="$1"
+verion="$2"
+root="$(git rev-parse --show-toplevel)"
+
+pushd "$root"
+
+pushd "infrastructure/$env"
+fpm="$(terraform output docker_repo_fpm)"
+nginx="$(terraform output docker_repo_nginx)"
+popd
+
+docker tag ecs-terraform-php-fpm "$fpm:$version"
+docker tag ecs-terraform-php-nginx "$nginx:$version"
+eval "$(aws ecr get-login)"
+docker push "$fpm:$version"
+docker push "$nginx:$version"
+
+popd
