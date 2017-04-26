@@ -1,5 +1,7 @@
 /vendor/*
 /build/*
+.terraform
+*.tfstate
 *.swp
 *.dmg
 *.gz
