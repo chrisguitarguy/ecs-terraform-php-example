@@ -11,6 +11,9 @@ env="$1"
 version="$2"
 root="$(git rev-parse --show-toplevel)"
 
+# build
+. "$root/bin/build"
+
 pushd "$root"
 
 pushd "infrastructure/$env"
