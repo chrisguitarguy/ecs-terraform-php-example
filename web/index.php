@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 require __DIR__.'/../vendor/autoload.php';
 
 $app = new Application([
-    'debug' => filter_var(getenv('APP_DEBUG'), FILTER_VALIDATE_BOOLEAN),
+    'debug' => (bool) getenv('APP_DEBUG'),
 ]);
 
 $app->get('/', function (Request $r) {
