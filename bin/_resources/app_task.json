@@ -1,0 +1,45 @@
+{
+    "family": "ecsterraformphp-{ENV}",
+    "networkMode": "bridge",
+    "taskRoleArn": "{ROLE_ARN}",
+    "containerDefinitions": [
+        {
+            "name": "fpm",
+            "image": "{FPM_REPO}:{VERSION}",
+            "cpu": 128,
+            "memory": 128,
+            "essential": true,
+            "hostname": "fpm",
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "{LOG_GROUP}",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecsterraformphp"
+                }
+            }
+        },
+        {
+            "name": "nginx",
+            "image": "{NGINX_REPO}:{VERSION}",
+            "cpu": 64,
+            "memory": 64,
+            "portMappings": [
+                {
+                    "containerPort": 80
+                }
+            ],
+            "essential": true,
+            "hostname": "nginx",
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "{LOG_GROUP}",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecsterraformphp"
+                }
+            },
+            "links": ["fpm:phpfpm"]
+        }
+    ]
+}
