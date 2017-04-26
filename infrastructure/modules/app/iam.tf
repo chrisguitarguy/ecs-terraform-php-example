@@ -69,5 +69,5 @@ resource "aws_iam_role_policy_attachment" "service_ecs" {
 
 resource "aws_iam_instance_profile" "server" {
     name = "server@${var.app}-${var.env}"
-    roles = ["${aws_iam_role.server.id}"]
+    role = "${aws_iam_role.server.id}"
 }
